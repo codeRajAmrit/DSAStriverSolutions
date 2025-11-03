@@ -1,0 +1,55 @@
+//Stock Buy And Sell
+
+// Brute Force Approach Time = O(N^2)
+#include <iostream> 
+#include <vector> 
+
+using namespace std; 
+
+int maxProfit(vector<int>& prices) {
+    int n = prices.size(), highestProfit = INT_MIN; 
+    for (int i = 0; i < n; i += 1) {
+        for (int j = i + 1; j < n; j += 1) highestProfit = max(highestProfit, prices[j] - prices[i]); 
+    }
+    return highestProfit; 
+}
+
+int main() {
+    int n; 
+    cin >> n; 
+    vector<int> prices(n); 
+    for (int i = 0; i < n; i += 1) cin >> prices[i];
+
+   cout << maxProfit(prices); 
+
+    return 0; 
+}
+________________________________________________________________________________________________________________________________________________________________________________________________________________________
+// Optimal Solutions Time = O(N)
+
+#include <iostream> 
+#include <vector> 
+
+using namespace std;
+
+int maxProfit(vector<int>& prices) {
+    int maxSum = 0, flag = 0;
+    for (int i = 0; i < prices.size() -1; i += 1) {
+        flag += prices[i+1] - prices[i]; 
+        if (flag < 0) flag = 0; 
+        maxSum = max(maxSum, flag); 
+    }
+    return maxSum; 
+}
+
+int main() {
+    int n; 
+    cin >> n; 
+    vector<int> prices(n); 
+    for (int i = 0; i < n; i += 1) cin >> prices[i];
+
+   cout << maxProfit(prices); 
+
+    return 0; 
+}
+
